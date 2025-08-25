@@ -1,119 +1,122 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ระบบเช็คชื่อเข้าออกห้องคอม (Local Storage)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>ระบบเช็คชื่อเข้าออกห้องคอม (Local Storage)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFBEB; /* Light yellow background */
-            color: #333;
-        }
-        .header-title {
-            font-size: 3rem; /* Extra large for main title */
-            font-weight: 700; /* Bold */
-            color: #FFD700; /* Gold/Yellow */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        .subheader-text {
-            font-size: 1.5rem; /* Large for sub-header */
-            font-weight: 600; /* Semi-bold */
-            color: #FFA500; /* Orange-Yellow */
-        }
-        .btn-primary {
-            background-color: #FFD700; /* Yellow */
-            color: #333;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary:hover {
-            background-color: #FFC107; /* Slightly darker yellow */
-            transform: translateY(-2px);
-        }
-        .input-field {
-            border: 1px solid #FFD700;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            background-color: #FFF;
-            color: #333;
-        }
-        .card {
-            background-color: #FFF;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 1rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-       .h12{
-           margin: 0;
-           height: 300px;
-           width: 300px;
-           display: block;
-           margin-left: auto;
-           margin-right: auto;
-       }
-.h13 {
-    width: 100%;
-    height: 300px;
-    box-sizing: border-box; /* ensures padding doesn't affect width */
-}
-    </style>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFBEB; /* Light yellow background */
+      color: #333;
+    }
+    .header-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #FFD700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .subheader-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #FFA500;
+    }
+    .btn-primary {
+      background-color: #FFD700;
+      color: #333;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary:hover {
+      background-color: #FFC107;
+      transform: translateY(-2px);
+    }
+    .input-field {
+      border: 1px solid #FFD700;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      background-color: #FFF;
+      color: #333;
+    }
+    .card {
+      background-color: #FFF;
+      border-radius: 1rem;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close-button:hover,
+    .close-button:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
-     <nav class="h13">
-       <img src="Background2.png" alt="Background2">
-    </nav>
-    
-    <nav class="h12">
-       <img src="npu-logo.png" alt="npu-logo">
-    </nav>
+  <!-- ✅ Stackable logo on top of banner image -->
+  <section class="relative w-full py-6">
+    <!-- Banner Background Image -->
+    <div class="max-w-7xl mx-auto px-4">
+      <img src="Background2.png" alt="Background2"
+           class="w-full h-[300px] object-cover rounded-lg shadow-md">
+    </div>
+
+    <!-- Centered Logo on Top -->
+    <div class="absolute top-6 left-1/2 transform -translate-x-1/2">
+      <img src="npu-logo.png" alt="npu-logo"
+           class="w-[120px] h-auto drop-shadow-lg">
+    </div>
+  </section>
+
+  <!-- You can add other content below this -->
+  <div class="max-w-7xl mx-auto px-4 mt-10">
+    <h1 class="header-title text-center">ระบบเช็คชื่อเข้าออกห้องคอม</h1>
+    <p class="subheader-text text-center mt-2">ยินดีต้อนรับสู่ระบบ</p>
+  </div>
+
+</body>
+</html>
 
     <div class="min-h-screen flex flex-col items-center p-4">
         <header class="text-center mb-8">
