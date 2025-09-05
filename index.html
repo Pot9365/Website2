@@ -131,7 +131,7 @@
 
         <nav class="mb-8 flex flex-wrap justify-center gap-4">
             <button onclick="navigateTo('checkin')" class="btn-primary flex items-center">
-                <i class="fas fa-user-check mr-2"></i>เช็คชื่อ
+                <i class="fas fa-user-check mr-2"></i>เข้าสู่ระบบ
             </button>
             <button onclick="navigateTo('report')" class="btn-primary flex items-center">
                 <i class="fas fa-clipboard-list mr-2"></i>รายงาน
@@ -140,7 +140,7 @@
                 <i class="fas fa-chart-bar mr-2"></i>สถิติ
             </button>
             <button onclick="navigateTo('addStudent')" class="btn-primary flex items-center">
-                <i class="fas fa-user-plus mr-2"></i>จัดการนักเรียน
+                <i class="fas fa-user-plus mr-2"></i>เพิ่มชื่อผู้ใช้
             </button>
             <button onclick="navigateTo('universitySettings')" class="btn-primary flex items-center">
                 <i class="fas fa-cog mr-2"></i>ตั้งค่ามหาวิทยาลัย
@@ -696,10 +696,10 @@ Object.values(studentRecords).forEach(student => {
                 let avgCheckInsPerDay = totalUniqueDays > 0 ? (totalCheckIns / totalUniqueDays).toFixed(2) : 0;
 
                 let dailyStatsHtml = `
-                    <p class="mb-2"><strong class="text-yellow-600">จำนวนการเช็คชื่อทั้งหมด:</strong> ${totalCheckIns} ครั้ง</p>
+                    <p class="mb-2"><strong class="text-yellow-600">จำนวนการเช็คชื่อทั้งหมด:</strong> ${totalCheckIns} คน</p>
                     <p class="mb-2"><strong class="text-yellow-600">จำนวนนักเรียนที่ไม่ซ้ำกันที่เช็คชื่อ:</strong> ${totalStudentsCheckedIn} คน</p>
                     <p class="mb-2"><strong class="text-yellow-600">จำนวนวันที่เช็คชื่อ:</strong> ${totalUniqueDays} วัน</p>
-                    <p class="mb-2"><strong class="text-yellow-600">ค่าเฉลี่ยการเช็คชื่อต่อวัน:</strong> ${avgCheckInsPerDay} ครั้ง/วัน</p>
+                    <p class="mb-2"><strong class="text-yellow-600">ค่าเฉลี่ยการเช็คชื่อต่อวัน:</strong> ${avgCheckInsPerDay} คน/วัน</p>
                     <h4 class="text-lg font-semibold mt-4 mb-2 text-gray-700">สถิติแยกตามชั้นเรียน:</h4>
                     <ul>
                 `;
@@ -765,7 +765,7 @@ Object.values(studentRecords).forEach(student => {
                                         return `วันที่: ${context[0].label}`;
                                     },
                                     label: function(context) {
-                                        return `${context.dataset.label}: ${context.raw} ครั้ง`;
+                                        return `${context.dataset.label}: ${context.raw} คน`;
                                     }
                                 }
                             }
